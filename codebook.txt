@@ -1,0 +1,48 @@
+Run_analysis.R creates FinalData.txt which contains tidy data according to project requirements.
+
+Dataset downloaded from the folder “getdata_projectfiles_UCI HAR Dataset”
+
+Data assigned to follow variables:
+1)	features <- features.txt : 561 rows, 2 columns
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.
+2)	activities <- activity_labels.txt : 6 rows, 2 columns
+List of activities performed when the corresponding measurements were taken and its codes (labels)
+3)	subject_test <- test/subject_test.txt : 2947 rows, 1 column
+contains test data of 9/30 volunteer test subjects being observed
+4)	x_test <- test/X_test.txt : 2947 rows, 561 columns
+contains recorded features test data
+5)	y_test <- test/y_test.txt : 2947 rows, 1 columns
+contains test data of activities’code labels
+6)	subject_train <- test/subject_train.txt : 7352 rows, 1 column
+contains train data of 21/30 volunteer subjects being observed
+7)	x_train <- test/X_train.txt : 7352 rows, 561 columns
+contains recorded features train data
+8)	y_train <- test/y_train.txt : 7352 rows, 1 columns
+contains train data of activities’code labels
+
+Creating one dataset by merging test and training sets
+ROW BINDING
+X (10299 rows, 561 columns) is created by merging x_train and x_test using rbind() function
+Y (10299 rows, 1 column) is created by merging y_train and y_test using rbind() function
+Subject (10299 rows, 1 column) is created by merging subject_train and subject_test using rbind() function
+COLOMN BINDING
+Merged_Data (10299 rows, 563 column) is created by merging Subject, Y and X using cbind() function
+
+Selecting the measurements on the mean and standard deviation for each measurement
+TidyData (10299 rows, 88 columns)
+
+Uses descriptive activity names to name the activities in the data set
+Entire numbers in code column of the TidyData replaced with corresponding activity taken from second column of the activities variable
+
+Appropriately labels the data set with descriptive variable names
+code column in TidyData renamed into activities
+“Acc” to “Accelerometer”
+“Gyro” to “Gyroscope”
+“BodyBody“ to  “Body”
+“Mag” to “Magnitude”
+“f*” to “Frequency”
+“t*”  to “Time”
+
+From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
+FinalData (180 rows, 88 columns) is created by sumarizing TidyData taking the means of each variable for each activity and each subject, after groupped by subject and activity.
+Export FinalData into FinalData.txt file.
